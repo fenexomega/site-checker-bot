@@ -10,7 +10,7 @@ class Site(db.Entity):
     users = Set('User')
 
 class User(db.Entity):
-    sites = Set(Site)
+    sites = Set(Site,reverse='users')
     chat_id = Required(int,unique=True)
     email   = Optional(str)
 
