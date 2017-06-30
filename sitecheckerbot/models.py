@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pony.orm import *
-from dbconfig import DbConfig
+from settings import DbConfig
 
 db = DbConfig.database
 

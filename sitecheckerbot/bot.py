@@ -18,10 +18,16 @@ help_text = """
 Hello, you can use the following commands:
 
 /help - Show this help.
-/subscrible *URL* - Subscrible to receive notifications when the site in the URL changes.
-[NOT IMPLEMENTED YET] /unsubscrible *URL* - Unsubscrible from the URL.
-[NOT IMPLEMENTED YET] /list - List your Subscriptions.
+/subscribe _URL_ - Subscrible to receive notifications when the site in the URL changes.
+/unsubscribe _URL_ - Unsubscribe from the URL.
+/list - List your Subscriptions.
 """
+
+def parseUrl(url):
+    url = url.replace('www.','')
+    if not 'http://' in url:
+        url = 'http://' + url
+    return url
 
 # Define a few command handlers. These usually take two argumentos bot and update. Error handlers also receive the raise TelegramError object in error.
 def start(bot, update):
@@ -32,11 +38,11 @@ def start(bot, update):
 def help(bot, update):
     update.message.reply_text(help_text)
 
-def subscrible(bot, update,args):
-    url = args[0]
-    url = url.replace('www.','')
-    if not 'http://' in url:
-        url = 'http://' + url
+def subscribe(bot, update,args):
+    if len(args) != 1:
+        update.message.reply_text('This option requires exactly one argument')
+        return
+    url = parseUrl(args[0])
     siteChecker.registerURL(url,update.message.chat_id)
     update.message.reply_text("You're now subscribed to {}.".format(url))
 
@@ -50,13 +56,13 @@ def list(bot, update):
     return
 
 
-def unsubscrible(bot, update,args):
-    url = args[0]
-    url = url.replace('www.','')
-    if not 'http://' in url:
-        url = 'http://' + url
+def unsubscribe(bot, update,args):
+    if len(args) != 1:
+        update.message.reply_text('This option requires exactly one argument')
+        return
+    url = parseUrl(args[0])
     chat_id = update.message.chat_id
-    if siteChecker.unsubscribleURL(url, chat_id):
+    if siteChecker.unsubscribeURL(url, chat_id):
         text = 'Your subscription to {} has been deleted.'.format(url)
     else:
         text = 'You\'re not subscribed to this site'    
@@ -69,18 +75,20 @@ def error(bot, update, error):
 
 def main():
     #Create the EventHandler and pass it your bot's token.
-    bot     = telegram.Bot(os.environ.get('TELEGRAM_BOT_TOKEN'))
-    updater = Updater(bot=bot)
+    # bot     = telegram.Bot(os.environ.get('TELEGRAM_BOT_TOKEN'))
+    # updater = Updater(bot=bot)
+    updater = Updater(os.environ.get('TELEGRAM_BOT_TOKEN'))
+    bot = updater.bot
     
 # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
     #set the commands
     dp.add_handler(CommandHandler("start",start))
-    dp.add_handler(CommandHandler("subscrible",
-        subscrible,pass_args=True))
-    dp.add_handler(CommandHandler("unsubscrible",
-        unsubscrible,pass_args=True))
+    dp.add_handler(CommandHandler("subscribe",
+        subscribe,pass_args=True))
+    dp.add_handler(CommandHandler("unsubscribe",
+        unsubscribe,pass_args=True))
     dp.add_handler(CommandHandler("list",list))
     dp.add_handler(CommandHandler("help",help))
 
@@ -93,8 +101,6 @@ def main():
     global siteChecker
     siteChecker = SiteChecker(bot)
     siteChecker.Run()
-    
-
 
 
 if __name__ == "__main__":
