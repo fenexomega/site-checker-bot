@@ -3,10 +3,10 @@ import setuptools
 
 setuptools.setup(name='site-changer-bot',
                  version=0.1,
-                 description='Python Package Boilerplate',
+                 description='Telegram Site Checker Bot',
                  long_description=open('README.md').read().strip(),
-                 author='Package Author',
-                 author_email='you@youremail.com',
+                 author='Jordy Ferreira',
+                 author_email='jordyfgomes@gmail.com',
                  url='http://path-to-my-packagename',
                  # packages=['sitechangerbot']
                  py_modules=['sitechangerbot'],
@@ -15,7 +15,7 @@ setuptools.setup(name='site-changer-bot',
                         'sitechangerbot = sitechangerbot.bot:main'
                         ]    
                  },
-                 install_requires=['python-telegram-bot','requests','pony','pymysql'],
+                 install_requires=['python-telegram-bot','requests','pony','pymysql','python-dotenv','selenium'],
                  license='MIT License',
                  zip_safe=False,
                  keywords='boilerplate package',

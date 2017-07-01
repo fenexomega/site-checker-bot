@@ -1,1 +1,6 @@
 python-telegram-bot
+pymysql
+requests
+pony
+python-dotenv
+selenium
