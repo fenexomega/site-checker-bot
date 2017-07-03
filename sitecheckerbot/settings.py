@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 from pony.orm import Database
 
 # Find the variables from .env
-load_dotenv(join(dirname(__file__),'.env'))
+load_dotenv('/etc/sitecheckerbot.conf')
 
 #use this on the MYSQL database
-#create database test_sitechecker character set utf8
+#create database sitechecker character set utf8
 class DbConfig:
     try:
         database = Database('mysql', host=os.getenv('MYSQL_HOST','localhost')\

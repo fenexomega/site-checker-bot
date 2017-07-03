@@ -30,6 +30,7 @@ def parseUrl(url):
         url = 'http://' + url
     return url
 
+dp = None
 # Define a few command handlers. These usually take two argumentos bot and update. Error handlers also receive the raise TelegramError object in error.
 def start(bot, update):
     user_id = update.message.chat_id
@@ -82,6 +83,7 @@ def main():
     bot = updater.bot
     
 # Get the dispatcher to register handlers
+    global dp
     dp = updater.dispatcher
 
     #set the commands
@@ -101,7 +103,11 @@ def main():
 
     global siteChecker
     siteChecker = SiteChecker(bot)
-    siteChecker.Run()
+    try:
+        siteChecker.Run()
+    except (KeyboardInterrupt, SystemExit):
+        logger.warn('Stopping bot')
+        updater.stop()
 
 
 if __name__ == "__main__":
