@@ -14,7 +14,10 @@ setuptools.setup(name='site-checker-bot',
                         'sitecheckerbot = sitecheckerbot.bot:main'
                         ]    
                  },
-                 install_requires=['python-telegram-bot','requests','pony','pymysql','python-dotenv','selenium'],
+                 data_files=[
+                    ('/etc/', ['sitecheckerbot.conf'])
+                    ],
+                 install_requires=['pillow','python-telegram-bot','requests','pony','pymysql','python-dotenv','selenium'],
                  license='MIT License',
                  zip_safe=True,
                  keywords='bot telegram site checker',
