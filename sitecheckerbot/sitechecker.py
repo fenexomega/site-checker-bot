@@ -5,9 +5,9 @@ from time import sleep
 from pony import *
 
 
-from settings import DbConfig
-from models import *
-from helper import Helper
+from sitecheckerbot.settings import DbConfig
+from sitecheckerbot.models import *
+from sitecheckerbot.helper import Helper
 
 
 TMP_FILE = '/tmp/screen_bot.png'
@@ -117,7 +117,10 @@ class SiteChecker:
     
     def Run(self):
         while True:
-            if self.hasInternetConnection():
-                self.checkUrls()
-            sleep(5)
+            try:
+                if self.hasInternetConnection():
+                    self.checkUrls()
+                sleep(5)
+            except Exception:
+                sys.exit(1)
             

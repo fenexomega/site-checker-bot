@@ -6,7 +6,8 @@ import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import telegram
 import logging
-from sitechecker import SiteChecker 
+import configparser
+from sitecheckerbot.sitechecker import SiteChecker 
 
 #enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
@@ -71,7 +72,7 @@ def unsubscribe(bot, update,args):
 
 
 def error(bot, update, error):
-    logger.warn('Update "%s" caused error "%s"'.format(update,error))
+    logger.warn('Update "{}" caused error "{}"'.format(update,error))
 
 def main():
     #Create the EventHandler and pass it your bot's token.

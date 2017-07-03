@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pony.orm import *
-from settings import DbConfig
+from sitecheckerbot.settings import DbConfig
 
 db = DbConfig.database
 
