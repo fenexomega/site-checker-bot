@@ -7,7 +7,7 @@ setuptools.setup(name='site-checker-bot',
                  long_description=open('README.md').read().strip(),
                  author='Jordy Ferreira',
                  author_email='jordyfgomes@gmail.com',
-                 url='http://path-to-my-packagename',
+                 url='https://github.com/fenexomega/site-checker-bot',
                  packages=['sitecheckerbot'],
                  entry_points={
                     'console_scripts':[
@@ -18,7 +18,7 @@ setuptools.setup(name='site-checker-bot',
                     ('/etc/', ['sitecheckerbot.conf'])
                     ],
                  install_requires=['pillow','python-telegram-bot','requests','pony','pymysql','python-dotenv','selenium'],
-                 license='MIT License',
+                 license='GPLv2',
                  zip_safe=True,
                  keywords='bot telegram site checker',
                  classifiers=['site', 'telegram'])
