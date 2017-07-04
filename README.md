@@ -1,4 +1,4 @@
-site-notifier-telegram-bot
+site-checker-bot
 ==========================
 
 A bot to notify when a website changes.
