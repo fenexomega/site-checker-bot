@@ -96,11 +96,11 @@ class SiteChecker:
         dir =  os.path.dirname(old)
         #save file
         try:
+            background = Image.new('RGB',CROP,(255,255,255,255))
             img = Image.open(old)
-            if img.mode != 'RGB':
-                img = img.convert('RGB')
             img = img.crop(CROP)
-            img.save(new)
+            background.paste(img,mask=img.split()[3])
+            background.save(new)
         except IOError as e:
             print("cannot convert {}".format(e))
         
@@ -139,7 +139,7 @@ class SiteChecker:
                 if self.hasInternetConnection():
                     self.checkUrls()
                 sleep(5)
-            except Exception:
-                print("Quebrou")
+            except Exception as e:
+                logger.critical('PROGRAM STOPPED: {}'.format(e))
                 sys.exit(1)
             
