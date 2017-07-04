@@ -3,7 +3,8 @@ site-notifier-telegram-bot
 
 A bot to notify when a website changes.
 
-It's based on the HTTP *Last Modified* header.
+This bot compares two screenshots of the website to see if it has changed.
+If it has, then the bot will send a notification to the user.
 
 ## Commands
 * /help - Display this command list.
@@ -11,26 +12,13 @@ It's based on the HTTP *Last Modified* header.
 * /subscribe URL - Subscrible to receive changes from the URL.
 * /unsubscrible URL  - Unsubscrible to stop receiving subscribles from this URL.
 
-
 ## Requirements
 
-Package requirements are handled using pip. To install them do
+You need to have _NPM_, _NodeJS_ and _Python3_ installed in your Linux box.
 
-```
-pip install -r requirements.txt
-```
+After that, run the script located at `scripts/install`, and then you're set.
 
-## Tests
+## Configuration
 
-Testing is set up using [pytest](http://pytest.org) and coverage is handled
-with the pytest-cov plugin.
-
-Run your tests with ```py.test``` in the root directory.
-
-Coverage is ran by default and is set in the ```pytest.ini``` file.
-To see an html output of coverage open ```htmlcov/index.html``` after running the tests.
-
-## Travis CI
-
-There is a ```.travis.yml``` file that is set up to run your tests for python 2.7
-and python 3.2, should you choose to use it.
+This bot uses the file `/etc/sitecheckerbot.conf` for configuration. There you have some enviroment variables to set.
+The most important of then is `TELEGRAM_BOT_TOKEN`. On that one you'll set the Telegram Bot Token you get from The Bot Father.
